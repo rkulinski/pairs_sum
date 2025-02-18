@@ -1,13 +1,25 @@
+from collections import defaultdict
+from typing import Any
+
+
 def find_unique_sum_pairs(arr: list[int]) -> dict[int, list[tuple[int, int]]]:
-    sums = {}
+    sum_map = defaultdict(list)
+    for item in arr:
+        validate_input(item)
 
     n = len(arr)
     for i in range(n):
-        validate_input(arr[i])
         for j in range(i + 1, n):
-            validate_input(arr[j])
+            pair_sum = arr[i] + arr[j]
+            pair = (arr[i], arr[j])
+            sum_map[pair_sum].append(pair)
 
-    return sums
+    result = {}
+    for pair_sum, pairs in sum_map.items():
+        if len(pairs) > 1:
+            result[pair_sum] = pairs
+
+    return result
 
 
 def print_results(input: dict[int, list[tuple[int, int]]]) -> None:
