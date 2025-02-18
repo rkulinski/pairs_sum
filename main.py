@@ -1,5 +1,6 @@
 from collections import defaultdict
 from typing import Any
+from itertools import combinations
 
 
 def validate_input(item: Any) -> None:
@@ -10,23 +11,14 @@ def validate_input(item: Any) -> None:
 
 
 def find_unique_sum_pairs(arr: list[int]) -> dict[int, list[tuple[int, int]]]:
-    sum_map = defaultdict(list)
     for item in arr:
         validate_input(item)
 
-    n = len(arr)
-    for i in range(n):
-        for j in range(i + 1, n):
-            pair_sum = arr[i] + arr[j]
-            pair = (arr[i], arr[j])
-            sum_map[pair_sum].append(pair)
+    sum_map = defaultdict(list)
+    for x, y in combinations(arr, 2):
+        sum_map[x + y].append((x, y))
 
-    result = {}
-    for pair_sum, pairs in sum_map.items():
-        if len(pairs) > 1:
-            result[pair_sum] = pairs
-
-    return result
+    return {paris_sum: pairs for paris_sum, pairs in sum_map.items() if len(pairs) > 1}
 
 
 def print_results(input_data: dict[int, list[tuple[int, int]]]) -> None:

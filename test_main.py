@@ -107,39 +107,12 @@ class TestUniqueSumPairs(unittest.TestCase):
             find_unique_sum_pairs(arr)
 
     # -------------------------------------------------------------------
-    # Performance / Memory Tests
+    # Performance Tests
     # -------------------------------------------------------------------
 
+    # Used for local runs - not a good candidate for common test due to compute time that may vary
     # def test_large_input_performance(self):
-    #     n = 10000
-    #     arr = list(range(n))
-    #     start_time = time.perf_counter()
-    #
-    #     _ = find_unique_sum_pairs(arr)
-    #
-    #     elapsed_time = time.perf_counter() - start_time
-    #     self.assertLess(
-    #         elapsed_time,
-    #         3.0,
-    #         f"Performance test took too long: {elapsed_time} seconds.",
-    #     )
-    #
-    # def test_large_input_memory(self):
-    #     n = 10000
-    #     arr = list(range(n))
-    #
-    #     result = find_unique_sum_pairs(arr)
-    #
-    #     dict_size = sys.getsizeof(result)
-    #     self.assertLess(
-    #         dict_size,
-    #         10_000_000,
-    #         f"Memory usage too high for the result: {dict_size} bytes.",
-    #     )
-    #
-    # def test_random_input_performance(self):
-    #     random.seed(0)  # Fix seed for consistent test behavior
-    #     n = 1000
+    #     n = 10_000
     #     arr = [random.randint(-1000, 1000) for _ in range(n)]
     #
     #     start_time = time.perf_counter()
@@ -148,9 +121,36 @@ class TestUniqueSumPairs(unittest.TestCase):
     #
     #     self.assertLess(
     #         elapsed_time,
-    #         3.0,
+    #         10.0,
     #         f"Random input performance test took too long: {elapsed_time} seconds.",
     #     )
+
+    def test_performance_scaling(self):
+        n_small = 5_000
+        n_large = 10_000
+
+        arr_small = [random.randint(-1000, 1000) for _ in range(n_small)]
+        arr_large = [random.randint(-1000, 1000) for _ in range(n_large)]
+
+        # Time the function for the smaller input
+        start_small = time.perf_counter()
+        _ = find_unique_sum_pairs(arr_small)
+        time_small = time.perf_counter() - start_small
+
+        # Time the function for the larger input
+        start_large = time.perf_counter()
+        _ = find_unique_sum_pairs(arr_large)
+        time_large = time.perf_counter() - start_large
+
+        ratio = time_large / time_small
+
+        # Since the algorithm is O(n^2), doubling n should roughly quadruple the runtime.
+        # Allow some tolerance
+        self.assertLess(
+            ratio,
+            6,
+            f"Expected performance scaling ratio < 6, got {ratio:.2f} (5k time: {time_small:.2f}s, 10k time: {time_large:.2f}s)",
+        )
 
 
 if __name__ == "__main__":
