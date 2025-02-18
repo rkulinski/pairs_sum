@@ -10,13 +10,19 @@ lint.select = [
     "W",  # pycodestyle warnings
     "F",  # pyflakes
     "I",  # isort
+    "COM" # flake8-commas
 ]
 
 [tool.isort]
 profile = "black"
 line_length = 88
 
+[tool.mypy]
+python_version = "3.11"
+
 [dependency-groups]
 dev = [
+    "mypy>=1.15.0",
+    "pytest>=8.3.4",
     "ruff>=0.9.6",
 ]

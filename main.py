@@ -2,16 +2,17 @@ from collections import defaultdict
 from itertools import combinations
 from typing import Any
 
+UniqueSumsOutput = dict[int, list[tuple[int, int]]]
 
 def validate_input(item: Any) -> None:
     """Accept only integers values."""
     if not isinstance(item, int):
         raise TypeError(
-            f"Expected integer in list, got {type(item).__name__} with value {item}."
+            f"Expected integer in list, got {type(item).__name__} with value {item}.",
         )
 
 
-def find_unique_sum_pairs(arr: list[int]) -> dict[int, list[tuple[int, int]]]:
+def find_unique_sum_pairs(arr: list[int]) -> UniqueSumsOutput:
     """Identify unique sum pairs from a list of integers.
 
     Given a list of integers, this function finds all pairs of numbers whose sum
@@ -32,7 +33,7 @@ def find_unique_sum_pairs(arr: list[int]) -> dict[int, list[tuple[int, int]]]:
     return {paris_sum: pairs for paris_sum, pairs in sum_map.items() if len(pairs) > 1}
 
 
-def print_results(input_data: dict[int, list[tuple[int, int]]]) -> None:
+def print_results(input_data: UniqueSumsOutput) -> None:
     """Print results in the desired format.
 
     Examples:

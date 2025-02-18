@@ -4,12 +4,12 @@ Given an unsorted array A[]. The task is to print all unique pairs in the unsort
 # How to run
 Sample run with example
 ```
-python main.py
+uv run main.py
 ```
 
 # Tests
 ```
-python test_main.py
+uv run pytest test_main.py
 ```
 
 # Dependencies
@@ -18,9 +18,14 @@ This project is using `uv`.
 https://docs.astral.sh/uv/
 
 # Formatting
-This project is using `ruff` for formatting and linting
+This project is using `ruff` for formatting and linting and `mypy` for type checking.
 
 Use this command to format code
 ```
 uv run ruff check --fix
+```
+
+Use this command to run type checks
+```
+uv run mypy .
 ```
