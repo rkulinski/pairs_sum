@@ -1,7 +1,6 @@
-import unittest
-import time
-import sys
 import random
+import time
+import unittest
 
 from main import find_unique_sum_pairs
 
@@ -110,7 +109,8 @@ class TestUniqueSumPairs(unittest.TestCase):
     # Performance Tests
     # -------------------------------------------------------------------
 
-    # Used for local runs - not a good candidate for common test due to compute time that may vary
+    # Used for local runs - not a good candidate for
+    # common test due to compute time that may vary
     # def test_large_input_performance(self):
     #     n = 10_000
     #     arr = [random.randint(-1000, 1000) for _ in range(n)]
@@ -144,12 +144,15 @@ class TestUniqueSumPairs(unittest.TestCase):
 
         ratio = time_large / time_small
 
-        # Since the algorithm is O(n^2), doubling n should roughly quadruple the runtime.
+        # Since the algorithm is O(n^2), doubling n should
+        # roughly quadruple the runtime.
         # Allow some tolerance
         self.assertLess(
             ratio,
             6,
-            f"Expected performance scaling ratio < 6, got {ratio:.2f} (5k time: {time_small:.2f}s, 10k time: {time_large:.2f}s)",
+            f"Expected performance scaling ratio < 6, "
+            f"got {ratio:.2f} (5k time: {time_small:.2f}s, "
+            f"10k time: {time_large:.2f}s)",
         )
 
 

@@ -11,3 +11,11 @@ python main.py
 ```
 python test_main.py
 ```
+
+# Formatting
+This project is using `ruff` for formatting and linting
+
+Use this command to format code
+```
+ruff check --fix
+```
