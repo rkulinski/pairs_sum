@@ -31,6 +31,12 @@ def find_unique_sum_pairs(arr: list[int]) -> dict[int, list[tuple[int, int]]]:
 
 def print_results(input_data: dict[int, list[tuple[int, int]]]) -> None:
     for sum_value in sorted(input_data.keys()):
-        pairs_str = " ".join(f"( {x}, {y})" for (x, y) in input_data[sum_value])
+        pairs_str = " ".join(f"({x}, {y})" for (x, y) in input_data[sum_value])
 
-        print(f"Pairs : {pairs_str} have sum : {sum_value}\n")
+        print(f"Pairs : {pairs_str} have sum : {sum_value}")
+
+
+if __name__ == "__main__":
+    # Sample run
+    pairs = find_unique_sum_pairs([6, 4, 12, 10, 22, 54, 32, 42, 21, 11])
+    print_results(pairs)
