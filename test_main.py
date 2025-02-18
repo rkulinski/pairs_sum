@@ -70,7 +70,7 @@ class TestUniqueSumPairs(unittest.TestCase):
         self.assertEqual(result, {})
 
     def test_all_zeros(self):
-        arr = [0, 0, 1]
+        arr = [0, 0, 0]
 
         expected_sums = {
             0: [(0, 0), (0, 0), (0, 0)],
