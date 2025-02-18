@@ -11,3 +11,16 @@ python main.py
 ```
 python test_main.py
 ```
+
+# Dependencies
+This project is using `uv`.
+
+https://docs.astral.sh/uv/
+
+# Formatting
+This project is using `ruff` for formatting and linting
+
+Use this command to format code
+```
+uv run ruff check --fix
+```
