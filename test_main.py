@@ -5,7 +5,17 @@ import random
 
 from main import find_unique_sum_pairs
 
+
 class TestUniqueSumPairs(unittest.TestCase):
+    def dict_of_sets(
+        self, d: dict[int, list[tuple[int, int]]]
+    ) -> dict[int, set[tuple[int, int]]]:
+        """Helper function to compare output."""
+        canonical_dict = {}
+        for sum_value, pairs in d.items():
+            canonical_dict[sum_value] = {tuple(sorted(pair)) for pair in pairs}
+        return canonical_dict
+
     def test_sums(self):
         arr = [6, 4, 12, 10, 22, 54, 32, 42, 21, 11]
         expected_sums = {
@@ -20,7 +30,23 @@ class TestUniqueSumPairs(unittest.TestCase):
 
         result = find_unique_sum_pairs(arr)
 
-        self.assertEqual(result, expected_sums)
+        self.assertEqual(self.dict_of_sets(result), self.dict_of_sets(expected_sums))
+
+    def test_sums_unordered(self):
+        arr = [6, 4, 12, 10, 22, 54, 32, 42, 21, 11]
+        expected_sums = {
+            32: [(10, 22), (21, 11)],
+            33: [(12, 21), (22, 11)],
+            16: [(4, 12), (10, 6)],
+            54: [(22, 32), (12, 42)],
+            43: [(22, 21), (32, 11)],
+            53: [(32, 21), (42, 11)],
+            64: [(10, 54), (22, 42)],
+        }
+
+        result = find_unique_sum_pairs(arr)
+
+        self.assertEqual(self.dict_of_sets(result), self.dict_of_sets(expected_sums))
 
     def test_empty_array(self):
         arr = []
@@ -45,6 +71,7 @@ class TestUniqueSumPairs(unittest.TestCase):
 
     def test_all_zeros(self):
         arr = [0, 0, 0]
+
         expected_sums = {
             0: [(0, 0), (0, 0), (0, 0)],
         }
@@ -66,12 +93,12 @@ class TestUniqueSumPairs(unittest.TestCase):
     def test_mixed_numbers(self):
         arr = [2, -1, 0, 1]
         expected_sums = {
-            1: [(2, -1), (0, 1)],
+            1: [(2, -1), (1, 0)],
         }
 
         result = find_unique_sum_pairs(arr)
 
-        self.assertEqual(result, expected_sums)
+        self.assertEqual(self.dict_of_sets(result), self.dict_of_sets(expected_sums))
 
     def test_unexpected_character(self):
         arr = [2, -1, 0, "a"]

@@ -2,6 +2,13 @@ from collections import defaultdict
 from typing import Any
 
 
+def validate_input(item: Any) -> None:
+    if not isinstance(item, int):
+        raise TypeError(
+            f"Expected integer in list, got {type(item).__name__} with value {item}."
+        )
+
+
 def find_unique_sum_pairs(arr: list[int]) -> dict[int, list[tuple[int, int]]]:
     sum_map = defaultdict(list)
     for item in arr:
@@ -22,12 +29,8 @@ def find_unique_sum_pairs(arr: list[int]) -> dict[int, list[tuple[int, int]]]:
     return result
 
 
-def print_results(input: dict[int, list[tuple[int, int]]]) -> None:
-    pass
+def print_results(input_data: dict[int, list[tuple[int, int]]]) -> None:
+    for sum_value in sorted(input_data.keys()):
+        pairs_str = " ".join(f"( {x}, {y})" for (x, y) in input_data[sum_value])
 
-
-def validate_input(item: Any) -> None:
-    if not isinstance(item, int):
-        raise TypeError(
-            f"Expected integer in list, got {type(item).__name__} with value {item}."
-        )
+        print(f"Pairs : {pairs_str} have sum : {sum_value}\n")
