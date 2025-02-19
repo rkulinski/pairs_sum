@@ -10,10 +10,12 @@ import pytest
 
 from main import UniqueSumsOutput, find_unique_sum_pairs
 
+CanonicalUniqueSumsOutput = dict[int, set[tuple[int, int]]]
 
-def dict_of_sets(d: UniqueSumsOutput) -> dict[int, set[tuple[int, int]]]:
+
+def dict_of_sets(d: UniqueSumsOutput) -> CanonicalUniqueSumsOutput:
     """Convert dict values to sets of sorted tuples."""
-    canonical_dict = {}
+    canonical_dict: CanonicalUniqueSumsOutput = {}
     for sum_value, pairs in d.items():
         canonical_dict[sum_value] = {
             cast(tuple[int, int], tuple(sorted(pair))) for pair in pairs
