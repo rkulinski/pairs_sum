@@ -1,6 +1,10 @@
 # Unique sum pairs finder
 Given an unsorted array A[]. The task is to print all unique pairs in the unsorted array with equal sum.
 
+Potential use cases for such algorithm:
+- Detecting hash collisions https://en.wikipedia.org/wiki/Hash_collision.
+- Finding group of items with same costs to prepare some bundle deals.
+
 # Pull requests checks
 GitHub Actions Checks: Every pull request undergoes automated checks via GitHub Actions, including:
 - Formatting and Lint Check
