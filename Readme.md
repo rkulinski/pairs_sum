@@ -1,6 +1,12 @@
 # Unique sum pairs finder
 Given an unsorted array A[]. The task is to print all unique pairs in the unsorted array with equal sum.
 
+# Pull requests checks
+GitHub Actions Checks: Every pull request undergoes automated checks via GitHub Actions, including:
+- Formatting and Lint Check
+- Test Suite
+- Mypy Verification
+
 # How to run
 Sample run with example
 ```
