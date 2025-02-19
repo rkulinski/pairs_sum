@@ -27,5 +27,5 @@ uv run ruff check --fix
 
 Use this command to run type checks
 ```
-uv run mypy .
+uv run mypy . --strict
 ```

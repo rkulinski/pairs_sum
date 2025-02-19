@@ -23,7 +23,7 @@ def dict_of_sets(d: UniqueSumsOutput) -> CanonicalUniqueSumsOutput:
     return canonical_dict
 
 
-def test_sums():
+def test_sums() -> None:
     """Test correct sums."""
     arr = [6, 4, 12, 10, 22, 54, 32, 42, 21, 11]
     expected_sums = {
@@ -44,7 +44,7 @@ def test_sums():
 @pytest.mark.xfail(
     reason="Expected failure due to incorrect expected sums.", strict=True,
 )
-def test_fail_on_incorrect_sums():
+def test_fail_on_incorrect_sums() -> None:
     """Test failure with incorrect expected sums."""
     arr = [6, 4, 12, 10, 22, 54, 32, 42, 21, 11]
     expected_sums = {
@@ -62,7 +62,7 @@ def test_fail_on_incorrect_sums():
     assert dict_of_sets(result) == dict_of_sets(expected_sums)
 
 
-def test_sums_unordered():
+def test_sums_unordered() -> None:
     """Test sums with unordered pairs."""
     arr = [6, 4, 12, 10, 22, 54, 32, 42, 21, 11]
     expected_sums = {
@@ -80,14 +80,14 @@ def test_sums_unordered():
     assert dict_of_sets(result) == dict_of_sets(expected_sums)
 
 
-def test_empty_array():
+def test_empty_array() -> None:
     """Test empty array returns empty dict."""
-    arr = []
+    arr: list[int] = []
     result = find_unique_sum_pairs(arr)
     assert result == {}
 
 
-def test_single_element():
+def test_single_element() -> None:
     """Test single element returns empty dict."""
     arr = [42]
 
@@ -96,7 +96,7 @@ def test_single_element():
     assert result == {}
 
 
-def test_no_repeated_sums():
+def test_no_repeated_sums() -> None:
     """Test array with no repeated sums returns empty dict."""
     arr = [1, 2, 3]
 
@@ -105,7 +105,7 @@ def test_no_repeated_sums():
     assert result == {}
 
 
-def test_all_zeros():
+def test_all_zeros()-> None:
     """Test all zeros."""
     arr = [0, 0, 0]
     expected_sums = {0: [(0, 0), (0, 0), (0, 0)]}
@@ -115,7 +115,7 @@ def test_all_zeros():
     assert result == expected_sums
 
 
-def test_same_number():
+def test_same_number() -> None:
     """Test array with identical numbers."""
     arr = [1, 1, 1]
     expected_sums = {2: [(1, 1), (1, 1), (1, 1)]}
@@ -125,7 +125,7 @@ def test_same_number():
     assert result == expected_sums
 
 
-def test_mixed_numbers():
+def test_mixed_numbers() -> None:
     """Test mixed positive and negative numbers."""
     arr = [2, -1, 0, 1]
     expected_sums = {1: [(2, -1), (1, 0)]}
@@ -135,15 +135,15 @@ def test_mixed_numbers():
     assert dict_of_sets(result) == dict_of_sets(expected_sums)
 
 
-def test_unexpected_character():
+def test_unexpected_character() -> None:
     """Test array with an unexpected string character."""
     arr = [2, -1, 0, "a"]
 
     with pytest.raises(TypeError):
-        find_unique_sum_pairs(arr)
+        find_unique_sum_pairs(arr) # type: ignore[arg-type]
 
 
-def test_performance_scaling():
+def test_performance_scaling() -> None:
     """Test performance scaling between small and large arrays."""
     n_small = 5000
     n_large = 10000
